@@ -1,0 +1,116 @@
+{
+  "name": "react-verificator",
+  "version": "1.0.0-alpha.0",
+  "description": "React validation JavaScript library",
+  "keywords": [
+    "validation",
+    "validator",
+    "verificator",
+    "react",
+    "react-verificator",
+    "react-validator"
+  ],
+  "author": "Nikita Stenin <stenin.nikita@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stenin-nikita/react-verificator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stenin-nikita/react-verificator/issues"
+  },
+  "homepage": "https://github.com/stenin-nikita/react-verificator",
+  "main": "lib/index.js",
+  "unpkg": "dist/react-verificator.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "src",
+    "tests"
+  ],
+  "scripts": {
+    "clean": "rimraf dist es lib",
+    "build:es": "tsc",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel es --out-dir lib",
+    "build:umd": "cross-env BABEL_ENV=umd NODE_ENV=development rollup -c",
+    "build:umd:min": "cross-env BABEL_ENV=umd NODE_ENV=production rollup -c",
+    "build": "npm run clean && npm run build:es && npm run build:commonjs && npm run build:umd && npm run build:umd:min",
+    "lint": "tslint -p tsconfig.json src/*.ts src/**/*.ts",
+    "test": "jest",
+    "cover": "jest --coverage"
+  },
+  "dependencies": {
+    "hoist-non-react-statics": "^2.3.1",
+    "verificator": "^1.0.0-beta.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^21.1.5",
+    "@types/react": "^16.0.22",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-check-es2015-constants": "^6.22.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-es2015-arrow-functions": "^6.22.0",
+    "babel-plugin-transform-es2015-block-scoped-functions": "^6.22.0",
+    "babel-plugin-transform-es2015-block-scoping": "^6.26.0",
+    "babel-plugin-transform-es2015-classes": "^6.24.1",
+    "babel-plugin-transform-es2015-computed-properties": "^6.24.1",
+    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+    "babel-plugin-transform-es2015-for-of": "^6.23.0",
+    "babel-plugin-transform-es2015-function-name": "^6.24.1",
+    "babel-plugin-transform-es2015-literals": "^6.22.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-plugin-transform-es2015-object-super": "^6.24.1",
+    "babel-plugin-transform-es2015-parameters": "^6.24.1",
+    "babel-plugin-transform-es2015-shorthand-properties": "^6.24.1",
+    "babel-plugin-transform-es2015-spread": "^6.22.0",
+    "babel-plugin-transform-es2015-sticky-regex": "^6.24.1",
+    "babel-plugin-transform-es2015-template-literals": "^6.22.0",
+    "babel-plugin-transform-es2015-unicode-regex": "^6.24.1",
+    "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
+    "babel-plugin-transform-es3-property-literals": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-register": "^6.26.0",
+    "cross-env": "^5.1.1",
+    "jest": "^21.2.1",
+    "react": "^16.1.0",
+    "react-dom": "^16.1.0",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.50.0",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-commonjs": "^8.2.6",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-uglify": "^2.0.1",
+    "ts-jest": "^21.2.1",
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.1"
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "useBabelrc": true
+      }
+    },
+    "cacheDirectory": ".cache",
+    "verbose": false,
+    "transform": {
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json"
+    ],
+    "testMatch": [
+      "**/tests/**/*.ts"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "!src/rules/index.ts",
+      "!src/index.ts"
+    ]
+  }
+}
