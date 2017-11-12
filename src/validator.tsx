@@ -1,17 +1,17 @@
 import React, { Component, ComponentType } from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
-import { Validator, Collection } from 'verificator/es'
-import { ComponentDecorator } from './types'
+import { Validator } from 'verificator/es'
+import { ComponentDecorator, ValidatorOptions } from './types'
 
 const defaultMapToProps = (props: any) => props
 
-export default function validator(rules: Collection<string|string[]>, mapToProps: Function = defaultMapToProps): ComponentDecorator {
-    const validator = new Validator({}, rules)
+export default function validator(options: ValidatorOptions, mapToProps: Function = defaultMapToProps): ComponentDecorator<any, any> {
+    const validator = new Validator({}, options.rules, options.messages || {}, options.attributes || {})
 
     function wrapWithValidatorComponent(WrappedComponent: ComponentType<any>): ComponentType {
         const displayName = `Validator(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`
 
-        class Validator extends Component {
+        class Validator extends Component<any, any> {
             static displayName = displayName
 
             static WrappedComponent = WrappedComponent
@@ -21,12 +21,13 @@ export default function validator(rules: Collection<string|string[]>, mapToProps
 
                 this.state = {
                     validating: false,
+                    validator: validator,
                 }
             }
 
-            calculateMapToProps() {
+            calculateMapToProps(validator: Validator) {
                 const result = {
-                    validator: validator,
+                    validator,
                     ownProps: this.props,
                 }
 
@@ -42,7 +43,7 @@ export default function validator(rules: Collection<string|string[]>, mapToProps
             render() {
                 const { props } = this
 
-                const validatorProps = this.calculateMapToProps()
+                const validatorProps = this.calculateMapToProps(this.state.validator)
                 const mergedPropsAndValidator = {
                     ...props,
                     ...validatorProps,
