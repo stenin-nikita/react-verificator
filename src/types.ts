@@ -1,13 +1,21 @@
 
 import { ComponentType } from 'react'
-import { Collection, Messages } from 'verificator/es';
+import { Items, Messages, Validator } from 'verificator/es'
 
 export interface ComponentDecorator<TOwnProps = {}, TMergedProps = {}> {
     (component: ComponentType<TMergedProps>): ComponentType<TOwnProps>
 }
 
-export interface ValidatorOptions {
-    rules: Collection<string|string[]>
-    attributes?: Collection<string>
+export interface ILocaleOptions {
+    attributes?: Items<string>
     messages?: Messages
+}
+
+export interface IOptions {
+    rules: Items<string|string[]>
+    customLocale?: ILocaleOptions
+}
+
+export interface IState {
+    validator: Validator
 }

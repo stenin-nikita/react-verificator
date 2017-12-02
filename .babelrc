@@ -24,7 +24,10 @@
     "env": {
         "commonjs": {
             "plugins": [
-                ["transform-es2015-modules-commonjs", { "loose": true }]
+                ["transform-es2015-modules-commonjs", { "loose": true }],
+                ["module-alias", [
+                    { "src": "npm:verificator", "expose": "verificator/es" }
+                ]]
             ]
         },
         "umd": {

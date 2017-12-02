@@ -23,6 +23,14 @@ const config = {
         exports: 'named',
         banner
     },
+    external: [
+        'react',
+        'verificator/es'
+    ],
+    globals: {
+        'react': 'React',
+        'verificator/es': 'Verificator'
+    },
     plugins: [
         nodeResolve({
             jsnext: true,
