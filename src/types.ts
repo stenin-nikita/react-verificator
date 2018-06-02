@@ -1,19 +1,14 @@
 
 import { ComponentType } from 'react'
-import { Items, Messages, Validator } from 'verificator/es'
+import { Items, Validator, CustomLocale } from 'verificator/es'
 
 export interface ComponentDecorator<TOwnProps = {}, TMergedProps = {}> {
     (component: ComponentType<TMergedProps>): ComponentType<TOwnProps>
 }
 
-export interface ILocaleOptions {
-    attributes?: Items<string>
-    messages?: Messages
-}
-
 export interface IOptions {
     rules: Items<string|string[]>
-    customLocale?: ILocaleOptions
+    customLocale?: CustomLocale
 }
 
 export interface IState {
